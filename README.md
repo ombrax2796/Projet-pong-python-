@@ -117,9 +117,10 @@
             z=Message(fenetrej,fg='blue', text=PJ2)
             fenetrej.update()
 
-            #teste 
-            def tafonction():
-                global positionX_aléa,positionY_aléa
+            """
+            #teste non comcluants :(
+            def les_bonus():
+                global positionX_aléa,positionY_aléa,bonus2j
                 #position bonus/malus aléatoire
                 positionX_aléa=randrange(0, 460)
                 positionY_aléa=randrange(0, 260) 
@@ -129,13 +130,16 @@
                 activ=1
                 if BouM==1:
                     bonus2j=can.create_oval(x1+positionX_aléa,y1+positionY_aléa,x2+positionX_aléa,y2+positionY_aléa,fill='yellow')#bonus sur les 2 joueur
+                    if can.coords(ball)[0]==can.coords(bonus2j)[0]:
+                        a=a**10
                 elif BouM==2:
                     malus=can.create_oval(x1+positionX_aléa,y1+positionY_aléa,x2+positionX_aléa,y2+positionY_aléa,fill='red')#malus 
                 elif BouM==3:
                     bonus=can.create_oval(x1+positionX_aléa,y1+positionY_aléa,x2+positionX_aléa,y2+positionY_aléa,fill='green')#bonus
 
 
-            fenetrej.after(2000,tafonction)
+            fenetrej.after(2000,les_bonus)
+            """
 
             #placements des composants
             can.grid(row=0,column=0,columnspan=3)
@@ -180,6 +184,7 @@
 
             #Mouvents et rebond de la balle
             while True:
+                global bonus2j
                 fenetrej.update_idletasks()
                 fenetrej.update()
                 time.sleep(0.01)
@@ -231,10 +236,7 @@
                     a-=0.5
 
                 #collisions des bonus/malus
-                if activ ==1:
-                    if len(can.find_overlapping(can.coords(bonus2j)[0],can.coords(bonus2j)[1],can.coords(bonus2j)[2],can.coords(bonus2j)[3]))>1:
 
-                        activ=0
                     #if len(can.find_overlapping(can.coords(malus)[0],can.coords(malus)[1],can.coords(malus)[2],can.coords(malus)[3]))>1:
                     #if len(can.find_overlapping(can.coords(bonus)[0],can.coords(bonus)[1],can.coords(bonus)[2],can.coords(player_one)[3]))>1:
 
